@@ -138,14 +138,3 @@ class FHDA_ClassSignUp:
         self.login()
         self.locate_student_registration()
         self.enter_classes()
-
-
-def main():
-    CRNs = ['CRN_number1', 'CRN_number2']
-    my_sign_up = FHDA_ClassSignUp('student_id', 'password', De_Anza=True, Foothill=False, term='summer'
-                                  , CRNs=CRNs)
-    my_sign_up.sign_up_for_my_classes()
-
-
-if __name__ == '__main__':
-    main()
