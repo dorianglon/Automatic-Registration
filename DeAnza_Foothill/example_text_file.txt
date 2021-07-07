@@ -1,0 +1,3 @@
+student_id,password,term,CRNs
+id1,password1,summer,CRN1 CRN2
+id2,password2,summer,CRN1 CRN2 CRN3

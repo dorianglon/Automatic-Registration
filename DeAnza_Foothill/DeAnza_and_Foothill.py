@@ -30,6 +30,7 @@ class FHDA_ClassSignUp:
         self.term = term
         self.CRNs = CRNs
         self.driver = webdriver.Chrome(ChromeDriverManager().install())
+        # self.driver = webdriver.Safari()
 
     def login(self):
         """
@@ -79,6 +80,7 @@ class FHDA_ClassSignUp:
                 time.sleep(1)
 
                 self.driver.switch_to.window(self.driver.window_handles[1])
+                time.sleep(1)
                 options = self.driver.find_elements_by_tag_name('option')
                 for option in options:
                     text = option.text.lower()
