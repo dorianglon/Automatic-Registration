@@ -1,4 +1,5 @@
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
 import time
 
@@ -28,7 +29,7 @@ class FHDA_ClassSignUp:
         self.Foothill = Foothill
         self.term = term
         self.CRNs = CRNs
-        self.driver = webdriver.Safari()
+        self.driver = webdriver.Chrome(ChromeDriverManager().install())
 
     def login(self):
         """
@@ -122,12 +123,12 @@ class FHDA_ClassSignUp:
                 submit = self.driver.find_element_by_xpath("//input[@value='Submit Changes']")
                 submit.click()
                 time.sleep(1)
-                ok_button = self.driver.find_element_by_xpath("button[@class='ui-button ui-corner-all ui-widget']")
+                ok_button = self.driver.find_element_by_xpath("//button[@class='ui-button ui-corner-all ui-widget']")
                 ok_button.click()
                 time.sleep(10)
                 signed_up = True
             except Exception as e:
-                print('Error occured while adding classes. Trying again.')
+                print('Error occurred while adding classes. Trying again.')
 
     def sign_up_for_my_classes(self):
         """
