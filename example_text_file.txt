@@ -1,0 +1,2 @@
+student_id,password,term,CRNs,registration_time
+id,password,summer,CRN1 CRN2,1626060187

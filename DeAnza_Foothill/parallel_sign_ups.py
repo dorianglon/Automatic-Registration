@@ -1,4 +1,4 @@
-from DeAnza_Foothill.DeAnza_and_Foothill import FHDA_ClassSignUp
+from DeAnza_and_Foothill import FHDA_ClassSignUp
 import threading
 import pandas as pd
 
@@ -12,7 +12,7 @@ def registration_call():
 
 
 student_count = 0
-df = pd.read_csv('example_text_file.txt')
+df = pd.read_csv('../example_text_file.txt')
 student_ids = df['student_id'].tolist()
 passwords = df['password'].tolist()
 terms = df['term'].tolist()
