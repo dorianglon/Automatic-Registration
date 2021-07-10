@@ -1,3 +1,2 @@
-student_id,password,term,CRNs
-id1,password1,summer,CRN1 CRN2
-id2,password2,summer,CRN1 CRN2 CRN3
+student_id,password,term,CRNs,registration_time
+20394976,dorianglon=surf2001,summer,CRN1 CRN2,1626060187

@@ -13,7 +13,7 @@ class FHDA_ClassSignUp:
     CLASS ABLE TO AUTOMATE SIGN UP PROCESS FOR CLASSES AT DE ANZA OR FOOTHILL COLLEGE
     """
 
-    def __init__(self, portal_username, portal_password, De_Anza, Foothill, term, CRNs):
+    def __init__(self, portal_username, portal_password, De_Anza, Foothill, term, CRNs, registration_time):
         """
         :param portal_username: your portal username
         :param portal_password: your portal password
@@ -29,8 +29,8 @@ class FHDA_ClassSignUp:
         self.Foothill = Foothill
         self.term = term
         self.CRNs = CRNs
+        self.registration_time = registration_time
         self.driver = webdriver.Chrome(ChromeDriverManager().install())
-        # self.driver = webdriver.Safari()
 
     def login(self):
         """
@@ -72,35 +72,30 @@ class FHDA_ClassSignUp:
                 time.sleep(1.5)
                 student_registration = self.driver.find_element_by_class_name("myapps-item-label")
                 student_registration.click()
-                time.sleep(1.5)
+                time.sleep(1)
+                click_add_classes = False
+                while not click_add_classes:
+                    if time.time() > self.registration_time:
+                        click_add_classes = True
                 add_classes = self.driver.find_element_by_link_text('Add or Drop Classes')
                 add_classes.click()
-                time.sleep(2.5)
                 self.driver.get('https://ssb-prod.ec.fhda.edu/PROD/bwskfreg.P_AltPin')
-                time.sleep(1)
-
                 self.driver.switch_to.window(self.driver.window_handles[1])
-                time.sleep(1)
                 options = self.driver.find_elements_by_tag_name('option')
                 for option in options:
                     text = option.text.lower()
                     if self.De_Anza:
                         if 'de anza' and self.term in text:
                             option.click()
-                            time.sleep(.25)
                             option.submit()
-                            time.sleep(0.25)
                             break
                     elif self.Foothill:
                         if 'foothill' and self.term in text:
                             option.click()
-                            time.sleep(.25)
                             option.submit()
-                            time.sleep(.25)
                             break
 
                 at_add_classes_link = True
-                time.sleep(1.5)
             except Exception as e:
                 print('Error occurred while navigating myportal. Trying again.')
 
@@ -119,7 +114,7 @@ class FHDA_ClassSignUp:
                     this_id_string = id_string + str(index)
                     this_CRN = self.driver.find_element_by_id(this_id_string)
                     this_CRN.send_keys(CRN)
-                    time.sleep(0.1)
+                    time.sleep(0.01)
                     index += 1
 
                 submit = self.driver.find_element_by_xpath("//input[@value='Submit Changes']")
@@ -129,6 +124,7 @@ class FHDA_ClassSignUp:
                 ok_button.click()
                 time.sleep(10)
                 signed_up = True
+                self.driver.close()
             except Exception as e:
                 print('Error occurred while adding classes. Trying again.')
 
