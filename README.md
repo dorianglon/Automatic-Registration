@@ -3,4 +3,4 @@ automatic sign up for classes
 
 ## Usage
 
-run parallel_sign_ups script (temporary)
+(temporary) run parallel_sign_ups.py
